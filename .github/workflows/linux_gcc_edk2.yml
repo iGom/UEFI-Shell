@@ -5,6 +5,9 @@ on:
     tags:
       - '*'
 
+permissions:
+  contents: write
+
 env:
   COMPILER: GCC
   FULL_SHELL_GUID: EA4BB293-2D7F-4456-A681-1F22F42CD0BC
