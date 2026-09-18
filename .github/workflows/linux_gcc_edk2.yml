@@ -6,13 +6,10 @@ on:
       - '*'
 
 env:
-  COMPILER: GCC5
-  GCC5_AARCH64_PREFIX: aarch64-linux-gnu-
-  GCC5_RISCV64_PREFIX: riscv64-linux-gnu-
-  GCC5_LOONGARCH64_PREFIX: loongarch64-unknown-linux-gnu-
+  COMPILER: GCC
   FULL_SHELL_GUID: EA4BB293-2D7F-4456-A681-1F22F42CD0BC
-  BUILD_TYPES: DEBUG RELEASE
-  ARCHS: X64 IA32 AARCH64 RISCV64 LOONGARCH64
+  BUILD_TYPES: RELEASE
+  ARCHS: X64
   # Shell versions:
   #  2.2 added on 2017.03.31
   #  2.1 added on 2014.08.05
@@ -37,14 +34,7 @@ jobs:
     - name: Install toolchains
       run: |
         sudo apt-get update
-        sudo apt-get -y --no-install-recommends install gcc-12-multilib gcc-12-aarch64-linux-gnu gcc-12-riscv64-linux-gnu nasm genisoimage uuid-dev dosfstools mtools
-        sudo ln -s /usr/bin/aarch64-linux-gnu-gcc-12 /usr/bin/aarch64-linux-gnu-gcc
-        sudo ln -s /usr/bin/aarch64-linux-gnu-gcc-ar-12 /usr/bin/aarch64-linux-gnu-gcc-ar
-        sudo ln -s /usr/bin/riscv64-linux-gnu-gcc-12 /usr/bin/riscv64-linux-gnu-gcc
-        sudo ln -s /usr/bin/riscv64-linux-gnu-gcc-ar-12 /usr/bin/riscv64-linux-gnu-gcc-ar
-        curl -L -O https://github.com/loongson/build-tools/releases/download/2025.08.08/x86_64-cross-tools-loongarch64-binutils_2.45-gcc_15.1.0-glibc_2.42.tar.xz
-        tar -xJf x86_64-cross-tools-loongarch64-binutils_2.45-gcc_15.1.0-glibc_2.42.tar.xz
-        echo "$PWD/cross-tools/bin" >> "$GITHUB_PATH"
+        sudo apt-get -y --no-install-recommends install gcc-12-multilib nasm genisoimage uuid-dev dosfstools mtools
 
     - name: Set version
       id: set_version
